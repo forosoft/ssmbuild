@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.dao.BookMapper">
+
+    <!--查询全部书-->
+    <select id="queryAllBook" resultType="Book">
+        SELECT * FROM SSMBUILD.BOOKS;
+    </select>
+
+    <!--根据 bookId 查询一本书-->
+    <select id="queryBookById" resultType="Book">
+        SELECT * FROM SSMBUILD.BOOKS WHERE BOOKID = #{bookId};
+    </select>
+
+    <!--增加书籍-->
+    <insert id="addBook" parameterType="Book">
+        INSERT SSMBUILD.BOOKS (bookName, bookCounts, detail)
+        VALUES (#{bookName}, #{bookCounts}, #{detail});
+    </insert>
+
+    <!--删除一本书-->
+    <delete id="delBook" >
+        DELETE FROM SSMBUILD.BOOKS WHERE BOOKID = #{bookId};
+    </delete>
+
+    <!--根据bookId更新一本书-->
+    <update id="updateBook" parameterType="Book">
+        UPDATE SSMBUILD.BOOKS
+           SET BOOKNAME = #{bookName},
+               BOOKCOUNTS = #{bookCounts},
+               DETAIL = #{detail}
+         WHERE BOOKID = #{bookID};
+    </update>
+
+    <!--根据 bookName 查询书籍-->
+    <select id="queryBookByName" resultType="Book">
+        SELECT * FROM SSMBUILD.BOOKS WHERE BOOKNAME LIKE '%' #{bookName} '%';
+    </select>
+
+</mapper>
